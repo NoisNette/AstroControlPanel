@@ -6,10 +6,26 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rviz_common/panel.hpp>
 
+#include <QLineEdit>
+#include <QLabel>
+#include <QPushButton>
+#include <QVBoxLayout>
+
+class QLineEdit;
+
 namespace astro_control_panel {
     class AstroControlPanel : public rviz_common::Panel {
+        Q_OBJECT
         public:
-            AstroControlPanel();
+          AstroControlPanel(QWidget* parent = 0);
+
+          virtual void save( rviz_common::Config config ) const;
+          virtual void load( const rviz_common::Config& config );
+        
+        private:
+          QLabel* label_;
+          QPushButton* button_;
+          QLineEdit* input_;
     };
 }
 

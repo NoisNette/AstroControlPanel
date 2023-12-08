@@ -1,0 +1,9 @@
+<library path="astro_control_panel">
+    <class name="astro_control_panel/AstroControlPanel"
+            type="astro_control_panel::AstroControlPanel"
+            base_class_type="rviz_common::Panel">
+        <description>
+        Adds a control panel for the ASTRO robot.
+        </description>
+    </class>
+</library>

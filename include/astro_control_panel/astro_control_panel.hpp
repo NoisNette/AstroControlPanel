@@ -2,6 +2,7 @@
 #define ASTRO_CONTROL_PANEL_H
 
 #include "astro_control_panel/visibility_control.hpp"
+#include "astro_control_panel/localization_section.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 #include <rviz_common/panel.hpp>
@@ -23,9 +24,7 @@ namespace astro_control_panel {
           virtual void load( const rviz_common::Config& config );
         
         private:
-          QLabel* label_;
-          QPushButton* button_;
-          QLineEdit* input_;
+          LocalizationSection* localizationSection_;
     };
 }
 

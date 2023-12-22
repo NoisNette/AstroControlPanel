@@ -20,6 +20,7 @@ find_package(pluginlib REQUIRED)
 
 set(${PROJECT_NAME}_headers_to_moc
   include/${PROJECT_NAME}/astro_control_panel.hpp
+  include/${PROJECT_NAME}/localization_section.hpp
 )
 
 foreach(header "${${PROJECT_NAME}_headers_to_moc}")
@@ -28,6 +29,7 @@ endforeach()
 
 set(${PROJECT_NAME}_source_files
   src/astro_control_panel.cpp
+  src/localization_section.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED

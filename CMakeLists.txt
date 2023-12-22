@@ -18,30 +18,30 @@ find_package(rviz_ogre_vendor REQUIRED)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(pluginlib REQUIRED)
 
-set(astro_control_panel_headers_to_moc
-  include/astro_control_panel/astro_control_panel.hpp
+set(${PROJECT_NAME}_headers_to_moc
+  include/${PROJECT_NAME}/${PROJECT_NAME}.hpp
 )
 
-foreach(header "${astro_control_panel_headers_to_moc}")
-  qt5_wrap_cpp(astro_control_panel_moc_files "${header}")
+foreach(header "${${PROJECT_NAME}_headers_to_moc}")
+  qt5_wrap_cpp(${PROJECT_NAME}_moc_files "${header}")
 endforeach()
 
-set(astro_control_panel_source_files
-  src/astro_control_panel.cpp
+set(${PROJECT_NAME}_source_files
+  src/${PROJECT_NAME}.cpp
 )
 
-add_library(astro_control_panel SHARED
-  ${astro_control_panel_moc_files}
-  ${astro_control_panel_source_files}
+add_library(${PROJECT_NAME} SHARED
+  ${${PROJECT_NAME}_moc_files}
+  ${${PROJECT_NAME}_source_files}
 )
 
-target_include_directories(astro_control_panel PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
 
 ament_export_include_directories(include)
-ament_export_targets(astro_control_panel HAS_LIBRARY_TARGET)
+ament_export_targets(${PROJECT_NAME} HAS_LIBRARY_TARGET)
 ament_export_dependencies(
   rviz_common
   sensor_msgs
@@ -57,7 +57,7 @@ target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
-target_compile_definitions(astro_control_panel PRIVATE "astro_control_panel_BUILDING_LIBRARY")
+target_compile_definitions(${PROJECT_NAME} PRIVATE "${PROJECT_NAME}_BUILDING_LIBRARY")
 
 # prevent pluginlib from using boost
 target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNCTIONS")
@@ -69,8 +69,8 @@ install(TARGETS ${PROJECT_NAME}
 pluginlib_export_plugin_description_file(rviz_common plugin_description.xml)
 
 install(
-  TARGETS astro_control_panel
-  EXPORT astro_control_panel
+  TARGETS ${PROJECT_NAME}
+  EXPORT ${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin

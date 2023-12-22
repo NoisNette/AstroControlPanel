@@ -19,7 +19,7 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(pluginlib REQUIRED)
 
 set(${PROJECT_NAME}_headers_to_moc
-  include/${PROJECT_NAME}/${PROJECT_NAME}.hpp
+  include/${PROJECT_NAME}/astro_control_panel.hpp
 )
 
 foreach(header "${${PROJECT_NAME}_headers_to_moc}")
@@ -27,7 +27,7 @@ foreach(header "${${PROJECT_NAME}_headers_to_moc}")
 endforeach()
 
 set(${PROJECT_NAME}_source_files
-  src/${PROJECT_NAME}.cpp
+  src/astro_control_panel.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED

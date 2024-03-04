@@ -15,12 +15,16 @@ find_package(rclcpp REQUIRED)
 find_package(rviz_common REQUIRED)
 find_package(rviz_rendering REQUIRED)
 find_package(rviz_ogre_vendor REQUIRED)
+find_package(rviz_default_plugins REQUIRED)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(pluginlib REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 set(${PROJECT_NAME}_headers_to_moc
   include/${PROJECT_NAME}/astro_control_panel.hpp
   include/${PROJECT_NAME}/localization_section.hpp
+  include/${PROJECT_NAME}/teleop_section.hpp
+  include/${PROJECT_NAME}/info_section.hpp
 )
 
 foreach(header "${${PROJECT_NAME}_headers_to_moc}")
@@ -30,6 +34,8 @@ endforeach()
 set(${PROJECT_NAME}_source_files
   src/astro_control_panel.cpp
   src/localization_section.cpp
+  src/teleop_section.cpp
+  src/info_section.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED
@@ -52,7 +58,7 @@ ament_export_dependencies(
 )
 
 # Link ament packages
-ament_target_dependencies(${PROJECT_NAME} rclcpp rviz_common rviz_rendering)
+ament_target_dependencies(${PROJECT_NAME} rclcpp rviz_common rviz_rendering geometry_msgs)
 
 # Link non ament packages
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets)

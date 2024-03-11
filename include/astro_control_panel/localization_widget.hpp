@@ -17,9 +17,7 @@ namespace astro_control_panel {
     class LocalizationWidget : public QWidget {
         Q_OBJECT
         public:
-          LocalizationWidget(
-            QWidget *parent
-          );
+          LocalizationWidget(QWidget *parent);
 
         private:
           QPushButton* startLocalizationButton_;

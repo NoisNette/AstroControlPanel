@@ -17,9 +17,7 @@ namespace astro_control_panel {
     class MappingWidget : public QWidget {
         Q_OBJECT
         public:
-          MappingWidget(
-            QWidget *parent
-          );
+          MappingWidget(QWidget *parent);
 
         private:
           QPushButton* startMappingButton_;

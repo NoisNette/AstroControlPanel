@@ -17,9 +17,7 @@ namespace astro_control_panel {
     class NavigationWidget : public QWidget {
         Q_OBJECT
         public:
-          NavigationWidget(
-            QWidget *parent
-          );
+          NavigationWidget(QWidget *parent);
 
         private:
           QPushButton* startNavigationButton_;

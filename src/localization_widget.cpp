@@ -1,62 +1,48 @@
-#include "astro_control_panel/localization_section.hpp"
-#include <iostream>
+#include "astro_control_panel/localization_widget.hpp"
 
 namespace astro_control_panel {
-    LocalizationSection::LocalizationSection(
-            QWidget *parent,
-            rviz_common::DisplayGroup *displayGroup
-        ) : QGroupBox("🗺️ | Localization", parent) {
+    LocalizationWidget::LocalizationWidget(
+            QWidget *parent
+        ) : QWidget(parent) {
         QVBoxLayout* layout = new QVBoxLayout;
 
         QHBoxLayout* startStopLayout = new QHBoxLayout;
 
         startLocalizationButton_ = new QPushButton("Start");
         stopLocalizationButton_ = new QPushButton("Stop");
-        saveMapButton_ = new QPushButton("Save Map");
-
+        loadMapButton_ = new QPushButton("Load Map");
 
         startStopLayout->addWidget(startLocalizationButton_);
         startStopLayout->addWidget(stopLocalizationButton_);
 
         layout->addLayout(startStopLayout);
-        layout->addWidget(saveMapButton_);
+        layout->addWidget(loadMapButton_);
 
         setLayout(layout);
 
         connect(startLocalizationButton_, &QPushButton::clicked, [this](void) { startLocalization_(); });
         connect(stopLocalizationButton_, &QPushButton::clicked, [this](void) { stopLocalization_(); });
-        connect(saveMapButton_, &QPushButton::clicked, [this](void) { saveMap_(); });
+        connect(loadMapButton_, &QPushButton::clicked, [this](void) { loadMap_(); });
     }
 
-    void LocalizationSection::startLocalization_() {
+    void LocalizationWidget::startLocalization_() {
         if (localizationRunning_)
             return;
         localizationRunning_ = true;
-        system("ros2 launch turtlebot_control_panel cartographer.launch.py &");
     }
 
-    void LocalizationSection::stopLocalization_() {
+    void LocalizationWidget::stopLocalization_() {
         if (!localizationRunning_)
             return;
         localizationRunning_ = false;
-
-        findAndTerminateProcess("turtlebot3_cartographer");
-        findAndTerminateProcess("cartographer_occupancy_grid_node");
     }
 
-    void LocalizationSection::saveMap_() {
+    void LocalizationWidget::loadMap_() {
         if (!localizationRunning_)
             return;
-        
-        QString dir = QFileDialog::getExistingDirectory(this, tr("Save Map"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-        if (dir == "")
-            return;
-
-        std::string command = "ros2 run nav2_map_server map_saver_cli -f " + dir.toStdString() + "/map";
-        system(command.c_str());
     }
 
-    void LocalizationSection::findAndTerminateProcess(std::string name) {
+    void LocalizationWidget::findAndTerminateProcess(std::string name) {
         std::array<char, 128> buffer;
         std::string result;
         std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(("ps -aux | grep " + name).c_str(), "r"), pclose);

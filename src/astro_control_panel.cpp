@@ -2,7 +2,7 @@
 
 namespace astro_control_panel {
     AstroControlPanel::AstroControlPanel(QWidget* parent) : rviz_common::Panel(parent) {
-        setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum);
     }
 
     void AstroControlPanel::save(rviz_common::Config config) const {
@@ -25,12 +25,6 @@ namespace astro_control_panel {
         );
 
         QVBoxLayout* layout = new QVBoxLayout;
-
-        // localizationSection_ = new LocalizationSection(
-        //     this,
-        //     context_->getRootDisplayGroup()
-        // );
-        // layout->addWidget(localizationSection_);
 
         commandSection_ = new CommandSection(this);
         layout->addWidget(commandSection_);

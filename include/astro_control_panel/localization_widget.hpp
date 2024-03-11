@@ -1,11 +1,8 @@
-#ifndef LOCALIZATION_SECTION_H
-#define LOCALIZATION_SECTION_H
+#ifndef LOCALIZATION_WIDGET_H
+#define LOCALIZATION_WIDGET_H
 
 #include <rclcpp/rclcpp.hpp>
-#include <rviz_common/display.hpp>
-#include <rviz_common/display_group.hpp>
 
-#include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -17,24 +14,23 @@
 #include <memory>
 
 namespace astro_control_panel {
-    class LocalizationSection : public QGroupBox {
+    class LocalizationWidget : public QWidget {
         Q_OBJECT
         public:
-          LocalizationSection(
-            QWidget *parent,
-            rviz_common::DisplayGroup *displayGroup
+          LocalizationWidget(
+            QWidget *parent
           );
 
         private:
           QPushButton* startLocalizationButton_;
           QPushButton* stopLocalizationButton_;
-          QPushButton* saveMapButton_;
+          QPushButton* loadMapButton_;
 
           bool localizationRunning_ = false;
           
           void startLocalization_();
           void stopLocalization_();
-          void saveMap_();
+          void loadMap_();
 
           void findAndTerminateProcess(std::string name);
     };

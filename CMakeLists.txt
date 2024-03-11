@@ -22,10 +22,12 @@ find_package(geometry_msgs REQUIRED)
 
 set(${PROJECT_NAME}_headers_to_moc
   include/${PROJECT_NAME}/astro_control_panel.hpp
-  include/${PROJECT_NAME}/localization_section.hpp
   include/${PROJECT_NAME}/teleop_section.hpp
   include/${PROJECT_NAME}/info_section.hpp
   include/${PROJECT_NAME}/command_section.hpp
+  include/${PROJECT_NAME}/mapping_widget.hpp
+  include/${PROJECT_NAME}/localization_widget.hpp
+  include/${PROJECT_NAME}/navigation_widget.hpp
 )
 
 foreach(header "${${PROJECT_NAME}_headers_to_moc}")
@@ -34,11 +36,13 @@ endforeach()
 
 set(${PROJECT_NAME}_source_files
   src/astro_control_panel.cpp
-  src/localization_section.cpp
   src/teleop_section.cpp
   src/info_section.cpp
   src/command_section.cpp
-)
+  src/mapping_widget.cpp
+  src/localization_widget.cpp
+  src/navigation_widget.cpp
+  )
 
 add_library(${PROJECT_NAME} SHARED
   ${${PROJECT_NAME}_moc_files}

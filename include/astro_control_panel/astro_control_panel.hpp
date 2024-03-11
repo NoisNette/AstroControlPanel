@@ -2,7 +2,6 @@
 #define ASTRO_CONTROL_PANEL_H
 
 #include "astro_control_panel/visibility_control.hpp"
-#include "astro_control_panel/localization_section.hpp"
 #include "astro_control_panel/teleop_section.hpp"
 #include "astro_control_panel/info_section.hpp"
 #include "astro_control_panel/command_section.hpp"

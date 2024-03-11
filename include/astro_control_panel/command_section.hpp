@@ -26,9 +26,9 @@ namespace astro_control_panel {
 
           int selectedCommandIndex = 0;
 
-          QWidget* mappingWidget;
-          QWidget* localizationWidget;
-          QWidget* navigationWidget;
+          QWidget* mappingWidget_;
+          QWidget* localizationWidget_;
+          QWidget* navigationWidget_;
 
           void changeCommand_(int index);
     };

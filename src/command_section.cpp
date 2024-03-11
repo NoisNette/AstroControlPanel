@@ -15,16 +15,16 @@ namespace astro_control_panel {
             commandPicker_->addItem("Navigation");
             mainLayout_->addWidget(commandPicker_);
 
-            mappingWidget = new MappingWidget(this);
-            localizationWidget = new LocalizationWidget(this);
-            navigationWidget = new NavigationWidget(this);
+            mappingWidget_ = new MappingWidget(this);
+            localizationWidget_ = new LocalizationWidget(this);
+            navigationWidget_ = new NavigationWidget(this);
 
-            mainLayout_->addWidget(mappingWidget);
-            mainLayout_->addWidget(localizationWidget);
-            mainLayout_->addWidget(navigationWidget);
+            mainLayout_->addWidget(mappingWidget_);
+            mainLayout_->addWidget(localizationWidget_);
+            mainLayout_->addWidget(navigationWidget_);
 
-            localizationWidget->hide();
-            navigationWidget->hide();
+            localizationWidget_->hide();
+            navigationWidget_->hide();
 
             setLayout(mainLayout_);
 
@@ -35,18 +35,18 @@ namespace astro_control_panel {
         if (index == selectedCommandIndex)
             return;
 
-        mappingWidget->hide();
-        localizationWidget->hide();
-        navigationWidget->hide();
+        mappingWidget_->hide();
+        localizationWidget_->hide();
+        navigationWidget_->hide();
 
         if (index == 0) { // Mapping
-            mappingWidget->show();
+            mappingWidget_->show();
         }
         else if (index == 1) { // Localization
-            localizationWidget->show();
+            localizationWidget_->show();
         }
         else if (index == 2) { // Navigation
-            navigationWidget->show();
+            navigationWidget_->show();
         }
 
         selectedCommandIndex = index;

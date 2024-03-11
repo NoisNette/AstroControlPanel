@@ -5,6 +5,7 @@
 #include "astro_control_panel/localization_section.hpp"
 #include "astro_control_panel/teleop_section.hpp"
 #include "astro_control_panel/info_section.hpp"
+#include "astro_control_panel/command_section.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 #include <rviz_common/panel.hpp>
@@ -31,7 +32,7 @@ namespace astro_control_panel {
         private:
           rviz_common::DisplayContext* context_;
 
-          LocalizationSection* localizationSection_;
+          CommandSection* commandSection_;
           InfoSection* infoSection_;
           TeleopSection* teleopSection_;
 

@@ -26,17 +26,20 @@ namespace astro_control_panel {
 
         QVBoxLayout* layout = new QVBoxLayout;
 
-        localizationSection_ = new LocalizationSection(
-            this,
-            context_->getRootDisplayGroup()
-        );
-        layout->addWidget(localizationSection_);
+        // localizationSection_ = new LocalizationSection(
+        //     this,
+        //     context_->getRootDisplayGroup()
+        // );
+        // layout->addWidget(localizationSection_);
+
+        commandSection_ = new CommandSection(this);
+        layout->addWidget(commandSection_);
 
         infoSection_ = new InfoSection(this);
         layout->addWidget(infoSection_);
 
-        teleopSection_ = new TeleopSection(this);
-        layout->addWidget(teleopSection_);
+        // teleopSection_ = new TeleopSection(this);
+        // layout->addWidget(teleopSection_);
 
         setLayout(layout);
     }

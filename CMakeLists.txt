@@ -25,6 +25,7 @@ set(${PROJECT_NAME}_headers_to_moc
   include/${PROJECT_NAME}/localization_section.hpp
   include/${PROJECT_NAME}/teleop_section.hpp
   include/${PROJECT_NAME}/info_section.hpp
+  include/${PROJECT_NAME}/command_section.hpp
 )
 
 foreach(header "${${PROJECT_NAME}_headers_to_moc}")
@@ -36,6 +37,7 @@ set(${PROJECT_NAME}_source_files
   src/localization_section.cpp
   src/teleop_section.cpp
   src/info_section.cpp
+  src/command_section.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED

@@ -16,10 +16,24 @@ namespace astro_control_panel {
 
         layout->addLayout(startStopLayout);
 
+        QHBoxLayout* launchFileDirLayout = new QHBoxLayout;
+        launchFileDirLayout->addWidget(new QLabel("Launch file:"));
+        launchFileAskPathButton_ = new QPushButton("Choose file");
+        launchFileDirLayout->addWidget(launchFileAskPathButton_);
+        layout->addLayout(launchFileDirLayout);
+
+        QHBoxLayout* configFileDirLayout = new QHBoxLayout;
+        configFileDirLayout->addWidget(new QLabel("Config file:"));
+        configFileAskPathButton_ = new QPushButton("Choose file");
+        configFileDirLayout->addWidget(configFileAskPathButton_);
+        layout->addLayout(configFileDirLayout);
+
         setLayout(layout);
 
         connect(startNavigationButton_, &QPushButton::clicked, [this](void) { startNavigation_(); });
         connect(stopNavigationButton_, &QPushButton::clicked, [this](void) { stopNavigation_(); });
+        connect(launchFileAskPathButton_, &QPushButton::clicked, [this](void) { chooseLaunchFile_(); });
+        connect(configFileAskPathButton_, &QPushButton::clicked, [this](void) { chooseConfigFile_(); });
     }
 
     void NavigationWidget::startNavigation_() {
@@ -32,6 +46,26 @@ namespace astro_control_panel {
         if (!navigationRunning_)
             return;
         navigationRunning_ = false;
+    }
+
+    void NavigationWidget::chooseLaunchFile_() {
+        QString dir = QFileDialog::getOpenFileName(this, tr("Choose launch file"), "/home", tr("(*.py *.xml *.yaml)"));
+        if (dir == "")
+            return;
+
+        std::string path = dir.toStdString();
+        std::string filename = path.substr(path.rfind("/")+1);
+        launchFileAskPathButton_->setText(filename.c_str());
+    }
+
+    void NavigationWidget::chooseConfigFile_() {
+        QString dir = QFileDialog::getOpenFileName(this, tr("Choose config file"), "/home", tr("(*.yaml)"));
+        if (dir == "")
+            return;
+
+        std::string path = dir.toStdString();
+        std::string filename = path.substr(path.rfind("/")+1);
+        launchFileAskPathButton_->setText(filename.c_str());
     }
 
     void NavigationWidget::findAndTerminateProcess(std::string name) {

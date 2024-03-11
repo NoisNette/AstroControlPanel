@@ -4,10 +4,10 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include <QLabel>
+#include <QFileDialog>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QGroupBox>
 
 #include <array>
 #include <stdexcept>
@@ -22,11 +22,19 @@ namespace astro_control_panel {
         private:
           QPushButton* startNavigationButton_;
           QPushButton* stopNavigationButton_;
+          QPushButton* launchFileAskPathButton_;
+          QPushButton* configFileAskPathButton_;
+          
+          QString launchFileDir_;
+          QString configFileDir_;
 
           bool navigationRunning_ = false;
           
           void startNavigation_();
           void stopNavigation_();
+
+          void chooseLaunchFile_();
+          void chooseConfigFile_();
 
           void findAndTerminateProcess(std::string name);
     };

@@ -19,8 +19,6 @@ namespace astro_control_panel {
 
     private:
       QLabel* cmdVelLabel_;
-
-      void cmdVelCallback_(const geometry_msgs::msg::Twist & msg) const;
   };
 }
 

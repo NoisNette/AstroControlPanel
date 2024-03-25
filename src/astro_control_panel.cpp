@@ -18,7 +18,7 @@ namespace astro_control_panel {
 
         auto rviz_ros_node = context_->getRosNodeAbstraction().lock()->get_raw_node();
 
-        this->cmdVelSubscription_ = rviz_ros_node->create_subscription<geometry_msgs::msg::Twist>(
+        rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmdVelSubscription_ = rviz_ros_node->create_subscription<geometry_msgs::msg::Twist>(
             "/cmd_vel",
             1,
             [this](const geometry_msgs::msg::Twist::SharedPtr msg) { infoSection_->updateCmdVel_(msg); }

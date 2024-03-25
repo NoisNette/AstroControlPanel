@@ -34,8 +34,6 @@ namespace astro_control_panel {
           CommandSection* commandSection_;
           InfoSection* infoSection_;
           TeleopSection* teleopSection_;
-
-          rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmdVelSubscription_;
     };
 }
 

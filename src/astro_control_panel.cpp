@@ -13,16 +13,20 @@ namespace astro_control_panel {
         rviz_common::Panel::load(config);
     }
 
-    void AstroControlPanel::onInitialize() {
-        context_ = this->getDisplayContext();
-
-        auto rviz_ros_node = context_->getRosNodeAbstraction().lock()->get_raw_node();
-
-        rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmdVelSubscription_ = rviz_ros_node->create_subscription<geometry_msgs::msg::Twist>(
+    void AstroControlPanel::setupSubscriptions_(rclcpp::Node::SharedPtr node) {
+        rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmdVelSubscription_ = node->create_subscription<geometry_msgs::msg::Twist>(
             "/cmd_vel",
             1,
             [this](const geometry_msgs::msg::Twist::SharedPtr msg) { infoSection_->updateCmdVel_(msg); }
         );
+    }
+
+    void AstroControlPanel::onInitialize() {
+        rviz_common::DisplayContext* context_ = this->getDisplayContext();
+
+        auto rviz_ros_node = context_->getRosNodeAbstraction().lock()->get_raw_node();
+        
+        setupSubscriptions_(rviz_ros_node);
 
         QVBoxLayout* layout = new QVBoxLayout;
 

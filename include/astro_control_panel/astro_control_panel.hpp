@@ -29,7 +29,7 @@ namespace astro_control_panel {
           void onInitialize() override;
 
         private:
-          rviz_common::DisplayContext* context_;
+          void setupSubscriptions_(rclcpp::Node::SharedPtr node);
 
           CommandSection* commandSection_;
           InfoSection* infoSection_;

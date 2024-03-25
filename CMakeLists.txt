@@ -8,6 +8,23 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+# include(FetchContent)
+
+# FetchContent_Declare(
+#   yaml-cpp
+#   GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
+#   GIT_TAG master
+# )
+# FetchContent_GetProperties(yaml-cpp)
+
+# if(NOT yaml-cpp_POPULATED)
+#   FetchContent_Populate(yaml-cpp)
+#   add_subdirectory(${yaml-cpp_SOURCE_DIR} ${yaml-cpp_BINARY_DIR})
+# endif()
+
+set(YAML_CPP_INSTALL ON CACHE INTERNAL "")
+add_subdirectory(yaml-cpp)
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
@@ -42,7 +59,7 @@ set(${PROJECT_NAME}_source_files
   src/mapping_widget.cpp
   src/localization_widget.cpp
   src/navigation_widget.cpp
-  )
+)
 
 add_library(${PROJECT_NAME} SHARED
   ${${PROJECT_NAME}_moc_files}
@@ -67,7 +84,7 @@ ament_export_dependencies(
 ament_target_dependencies(${PROJECT_NAME} rclcpp rviz_common rviz_rendering geometry_msgs)
 
 # Link non ament packages
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} Qt5::Widgets yaml-cpp)
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
